@@ -15,6 +15,7 @@ import entity.EntityOrdine;
 import entity.EntityRigaAcquisto;
 import entity.EntityUtenteGuest;
 import entity.StatoOrdine;
+import exception.DAOException;
 import services.ServizioDiPosta;
 
 public class GestoreSanitaria{
@@ -33,8 +34,12 @@ public class GestoreSanitaria{
 	EntityOrdine ordine = null;
 	EntityMessaggioConferma msgConferma = null;
 	ServizioDiPosta sdp = null;
+	Map<String,Integer>carrello = null;
 	
-	public Map<Boolean,EntityMessaggioConferma> acquistaProdotti(Map<String, Integer>carrello,EntityClienteRegistrato ec,EntityUtenteGuest ug) throws SQLException, InterruptedException {
+	public Map<Boolean,EntityMessaggioConferma> acquistaProdotti(Map<String, Integer>carrello,EntityClienteRegistrato ec,EntityUtenteGuest ug) throws InterruptedException, DAOException {
+		if(carrello.isEmpty()) {
+			return null;
+		}
 		
 		if(ec != null) {
 			popolaSchedaUtenteReg(ec);
@@ -122,5 +127,15 @@ public class GestoreSanitaria{
 		telefono = ug.getTelefono();
 	}
 	
+	public Map<String,Integer> selezionaProdotto(String nomeP,int quantita) throws DAOException {
+		catalogo = new ProdottiDao();
+		carrello = new HashMap<String,Integer>();
+		int id = catalogo.getIdProdotto(nomeP);
+		if(id == -1) {
+			return carrello;
+		}
+		carrello.put(nomeP, quantita);
+		return carrello;
+	}
 	
 }

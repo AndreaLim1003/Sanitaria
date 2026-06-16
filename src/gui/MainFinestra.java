@@ -20,6 +20,8 @@ import javax.swing.border.SoftBevelBorder;
 import control.Authenticator;
 import control.GestoreSanitaria;
 import entity.EntityClienteRegistrato;
+import entity.EntityMessaggioConferma;
+import entity.EntityUtenteGuest;
 import exception.DAOException;
 import exception.OperationException;
 
@@ -30,7 +32,10 @@ import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import java.awt.CardLayout;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.util.EventListener;
+import java.util.HashMap;
+import java.util.Map;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
 import javax.swing.JComboBox;
@@ -47,6 +52,7 @@ public class MainFinestra extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private GestoreSanitaria gs;
 	private EntityClienteRegistrato ec = null;
+	private EntityUtenteGuest ug = null;
 	private Authenticator at;
 	private JPanel contentPane;
 	private JTextField campoEmail;
@@ -67,6 +73,14 @@ public class MainFinestra extends JFrame {
 	private JButton btnVisualizzaDescrizione;
 	private JButton btnAcquista;
 	private JButton btnRegistrati;
+	private JComboBox selettoreQuantita;
+	private Map<String,Integer> carrello = new HashMap<String,Integer>();
+	private JTextField campoNomeGuest;
+	private JTextField campoCognomeGuest;
+	private JTextField campoIndirizzoGuest;
+	private JTextField campoTelefonoGuest;
+	private JTextField campoEmailGuest;
+	private JButton btnConfermaDati;
 
 	
 	public static void main(String[] args) {
@@ -179,7 +193,7 @@ public class MainFinestra extends JFrame {
 		btnVisualizzaDescrizione.setBounds(596, 132, 193, 23);
 		pannello.add(btnVisualizzaDescrizione);
 		
-		JComboBox selettoreQuantita = new JComboBox();
+		selettoreQuantita = new JComboBox();
 		selettoreQuantita.setBackground(SystemColor.control);
 		selettoreQuantita.setFont(new Font("Cambria", Font.PLAIN, 14));
 		selettoreQuantita.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"}));
@@ -423,6 +437,102 @@ public class MainFinestra extends JFrame {
 		textArea.setBackground(SystemColor.control);
 		textArea.setBounds(451, 27, 375, 97);
 		panel_4.add(textArea);
+		
+		JPanel inserimentoDatiAcquisto = new JPanel();
+		inserimentoDatiAcquisto.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		inserimentoDatiAcquisto.setBackground(SystemColor.inactiveCaption);
+		contentPane.add(inserimentoDatiAcquisto, "inserimentoDatiAcquisto");
+		inserimentoDatiAcquisto.setLayout(new GridLayout(0, 3, 0, 0));
+		
+		JPanel panel_1 = new JPanel();
+		panel_1.setBackground(SystemColor.inactiveCaption);
+		panel_1.setBorder(new EmptyBorder(0, 0, 0, 0));
+		inserimentoDatiAcquisto.add(panel_1);
+		panel_1.setLayout(null);
+		
+		JLabel lblNewLabel_9 = new JLabel("Nome:");
+		lblNewLabel_9.setFont(new Font("Cambria", Font.PLAIN, 14));
+		lblNewLabel_9.setBounds(196, 77, 80, 32);
+		panel_1.add(lblNewLabel_9);
+		
+		JLabel lblNewLabel_9_1 = new JLabel("Cognome:");
+		lblNewLabel_9_1.setFont(new Font("Cambria", Font.PLAIN, 14));
+		lblNewLabel_9_1.setBounds(196, 141, 80, 32);
+		panel_1.add(lblNewLabel_9_1);
+		
+		JLabel lblNewLabel_9_2 = new JLabel("Indirizzo:");
+		lblNewLabel_9_2.setFont(new Font("Cambria", Font.PLAIN, 14));
+		lblNewLabel_9_2.setBounds(196, 204, 80, 32);
+		panel_1.add(lblNewLabel_9_2);
+		
+		JLabel lblNewLabel_9_1_1 = new JLabel("Telefono:");
+		lblNewLabel_9_1_1.setFont(new Font("Cambria", Font.PLAIN, 14));
+		lblNewLabel_9_1_1.setBounds(196, 262, 80, 32);
+		panel_1.add(lblNewLabel_9_1_1);
+		
+		JLabel lblNewLabel_9_1_1_1 = new JLabel("Email:");
+		lblNewLabel_9_1_1_1.setFont(new Font("Cambria", Font.PLAIN, 14));
+		lblNewLabel_9_1_1_1.setBounds(196, 323, 80, 32);
+		panel_1.add(lblNewLabel_9_1_1_1);
+		
+		JPanel panel_2 = new JPanel();
+		panel_2.setBackground(SystemColor.inactiveCaption);
+		panel_2.setBorder(new EmptyBorder(0, 0, 0, 0));
+		inserimentoDatiAcquisto.add(panel_2);
+		panel_2.setLayout(null);
+		
+		JLabel lblNewLabel_8 = new JLabel("Inserire dati:");
+		lblNewLabel_8.setFont(new Font("Cambria", Font.PLAIN, 14));
+		lblNewLabel_8.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_8.setBounds(0, 11, 276, 31);
+		panel_2.add(lblNewLabel_8);
+		
+		campoNomeGuest = new JTextField();
+		campoNomeGuest.setFont(new Font("Cambria", Font.PLAIN, 14));
+		campoNomeGuest.setBackground(SystemColor.control);
+		campoNomeGuest.setBounds(0, 79, 276, 31);
+		panel_2.add(campoNomeGuest);
+		campoNomeGuest.setColumns(10);
+		
+		campoCognomeGuest = new JTextField();
+		campoCognomeGuest.setFont(new Font("Cambria", Font.PLAIN, 14));
+		campoCognomeGuest.setBackground(SystemColor.control);
+		campoCognomeGuest.setColumns(10);
+		campoCognomeGuest.setBounds(0, 141, 276, 31);
+		panel_2.add(campoCognomeGuest);
+		
+		campoIndirizzoGuest = new JTextField();
+		campoIndirizzoGuest.setFont(new Font("Cambria", Font.PLAIN, 14));
+		campoIndirizzoGuest.setBackground(SystemColor.control);
+		campoIndirizzoGuest.setColumns(10);
+		campoIndirizzoGuest.setBounds(0, 204, 276, 31);
+		panel_2.add(campoIndirizzoGuest);
+		
+		campoTelefonoGuest = new JTextField();
+		campoTelefonoGuest.setFont(new Font("Cambria", Font.PLAIN, 14));
+		campoTelefonoGuest.setBackground(SystemColor.control);
+		campoTelefonoGuest.setColumns(10);
+		campoTelefonoGuest.setBounds(0, 261, 276, 31);
+		panel_2.add(campoTelefonoGuest);
+		
+		campoEmailGuest = new JTextField();
+		campoEmailGuest.setFont(new Font("Cambria", Font.PLAIN, 14));
+		campoEmailGuest.setBackground(SystemColor.control);
+		campoEmailGuest.setColumns(10);
+		campoEmailGuest.setBounds(0, 323, 276, 31);
+		panel_2.add(campoEmailGuest);
+		
+		btnConfermaDati = new JButton("Conferma Dati");
+		btnConfermaDati.setFont(new Font("Cambria", Font.PLAIN, 14));
+		btnConfermaDati.setBackground(SystemColor.control);
+		btnConfermaDati.setBounds(0, 401, 276, 42);
+		panel_2.add(btnConfermaDati);
+		
+		JPanel panel_3 = new JPanel();
+		panel_3.setBackground(SystemColor.inactiveCaption);
+		panel_3.setBorder(new EmptyBorder(0, 0, 0, 0));
+		inserimentoDatiAcquisto.add(panel_3);
+		panel_3.setLayout(null);
 
 		registraAzioni();
 		
@@ -489,5 +599,106 @@ public class MainFinestra extends JFrame {
 				
 			}
 		});
+		
+		btnAggiungiAlCarrello.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String prodotto = campoProdotto.getText().trim();
+				String quantitaSel = (String) selettoreQuantita.getSelectedItem();
+				int quantita = Integer.parseInt(quantitaSel);
+				gs = new GestoreSanitaria();
+				try {
+					Map<String,Integer> carrelloAppoggio = gs.selezionaProdotto(prodotto, quantita);
+					if(!carrelloAppoggio.isEmpty()) {
+						for(Map.Entry<String, Integer> entry : carrelloAppoggio.entrySet()) {
+							String prod = entry.getKey();
+							int q = entry.getValue();
+							carrello.put(prod,q);
+						}
+						JOptionPane.showMessageDialog(contentPane,"Prodotto inserito correttamente nel carrello");
+					}else {
+						JOptionPane.showMessageDialog(contentPane,"Prodotto non esiste, riprovare con altro.");
+					}
+				} catch (DAOException e1) {
+					JOptionPane.showMessageDialog(contentPane, e1,"Errore, Prodotto inesistente",JOptionPane.ERROR_MESSAGE);
+				}
+			}
+		});
+		
+		btnAcquista.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				gs = new GestoreSanitaria();
+				boolean valore =false;
+				EntityMessaggioConferma msg = null;
+				JTextArea areaTesto = new JTextArea(10,20);
+				areaTesto.setLineWrap(true);
+				areaTesto.setWrapStyleWord(true);
+				JScrollPane sp = new JScrollPane(areaTesto);
+				
+				try {
+					if(ec == null && ug==null) {
+						
+						CardLayout cl = (CardLayout) contentPane.getLayout();
+						cl.show(contentPane, "inserimentoDatiAcquisto");
+						return;
+						
+					}
+					
+					
+					Map<Boolean,EntityMessaggioConferma> msgConferma = gs.acquistaProdotti(carrello, ec, ug);
+					if(msgConferma != null) {
+						for(Map.Entry<Boolean, EntityMessaggioConferma> entry: msgConferma.entrySet()) {
+							valore = entry.getKey();
+							msg = entry.getValue();
+						}
+						if(!valore && msg!=null) {
+							String messaggio = "Gentile "+msg.getNome()+" "+ msg.getCognome()+" l'ordine numero: "+msg.getId_ordine()+", di importo totale: "+msg.getPrezzoTot()+" da lei richiesto è stato completato con successo."
+									+ " Verrà spedito nel minor tempo possibile all'indirizzo: "+ msg.getIndirizzo()+".\n Per qualsiasi comunicazione verrà contattato al numero: "+msg.getTelefono()+"\nServizio mail non disponibile, verrà riprovato"
+											+ " l'invio della conferma tramite email tra 15 min";
+							areaTesto.setText(messaggio);
+							JOptionPane.showMessageDialog(null,sp,"messaggio di conferma",JOptionPane.PLAIN_MESSAGE);
+							
+						}else if(valore && msg!=null) {
+							JOptionPane.showMessageDialog(contentPane, "Ordine effettuato con successo");
+						}
+					}else {
+						JOptionPane.showMessageDialog(contentPane, "Tentativo di acquisto di carrello vuoto");
+					}
+				} catch (InterruptedException e1) {
+					JOptionPane.showMessageDialog(contentPane, e1,"Errore thread invio email",JOptionPane.ERROR_MESSAGE);
+				} catch (DAOException e1) {
+					JOptionPane.showMessageDialog(contentPane, e1,"Errore DB",JOptionPane.ERROR_MESSAGE);
+				}
+			}
+		});
+		
+		btnConfermaDati.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String nome = campoNomeGuest.getText().trim();
+				String cognome = campoCognomeGuest.getText().trim();
+				String indirizzo = campoIndirizzoGuest.getText().trim();
+				String Telefono = campoTelefonoGuest.getText().trim();
+				for(int i=0;i<Telefono.length();i++) {
+					if(!Character.isDigit(Telefono.charAt(i)) || Telefono.length()>10 ) {
+						JOptionPane.showMessageDialog(contentPane, "Errore numero di telefono non conforme!");
+						return;
+					}
+				}
+				String email = campoEmailGuest.getText().trim();
+				if(!email.contains("@")) {
+					JOptionPane.showMessageDialog(contentPane, "Errore Email non contiene @");
+					return;
+				}
+				
+				ug = new EntityUtenteGuest(nome, cognome, indirizzo, email, Telefono);
+				CardLayout cl = (CardLayout) contentPane.getLayout();
+				cl.show(contentPane, "PannelloPrincipale");
+				btnAcquista.doClick();
+			}
+			
+		});
+		
 	}
 }
