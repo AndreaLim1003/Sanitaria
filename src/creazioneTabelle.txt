@@ -1,0 +1,62 @@
+create table Prodotti(
+id_prodotto int auto_increment primary key,
+categoria varchar(100),
+nomeProdotto varchar(100) unique,
+descrizione varchar(1000),
+prezzoUnitario decimal(10,2)
+);
+
+create table Magazzino(
+id_prodotto int primary key,
+quantitaDisponibile int,
+foreign key (id_prodotto) references Prodotti(id_prodotto) on delete cascade
+);
+
+
+create table Ordini(
+id_ordine int auto_increment primary key,
+id_cliente int null, 
+dataCreazione date,
+indirizzo varchar(100),
+email varchar(100),
+stato varchar(100),
+prezzoFinale decimal(10,2),
+foreign key (id_cliente) references ClientiRegistrati(id_cliente) on delete set null
+);
+
+create table DettaglioOrdini(
+id_ordine int,
+id_prodotto int,
+quantitaSelezionata int,
+prezzoAcquisto decimal(10,2),
+primary key (id_ordine,id_prodotto),
+foreign key (id_ordine) references Ordini(id_ordine) on delete cascade,
+foreign key (id_prodotto) references Prodotti(id_prodotto)
+);
+
+create table Report(
+id_report int auto_increment primary key,
+meseRiferimento date,
+numeroOrdini int,
+incassoTotale decimal(10,2)
+);
+
+create table DettaglioReport(
+id_report int,
+id_prodotto int,
+quantitaVenduta int,
+primary key (id_report,id_prodotto),
+foreign key (id_report) references Report(id_report) on delete cascade,
+foreign key (id_prodotto) references Prodotti(id_prodotto));
+
+create table ClientiRegistrati(
+id_cliente int auto_increment primary key,
+nome varchar(100),
+cognome varchar(100),
+indirizzo varchar(100),
+email varchar(100) unique,
+password varchar(100),
+telefono varchar(20));
+
+
+shww wnvn bntu mndf

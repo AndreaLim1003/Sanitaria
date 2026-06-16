@@ -1,0 +1,455 @@
+2026-06-13 15:26:04.352915+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "create table catalogo(\000d\000aid int auto_increment,\000d\000anomeProdotto varchar(100) primary key)\000d\000a\000d\000a[*]create table Magazzino(\000d\000aid_prodotto int primary key,\000d\000aquantitaDisponibile int)\000d\000a\000d\000acreate table Prodotti(\000d\000aid_prodotto int auto_increment,\000d\000acategoria varchar(100),\000d\000anomeProdotto varchar(100) nomeProdotto,\000d\000adescrizione varchar(1000),\000d\000aprezzoUnitario float)\000d\000a\000d\000acreate table Ordini(\000d\000aid_ordine int auto_increment primary key,\000d\000adataCreazione date,\000d\000aindirizzo varchar(100),\000d\000aemail varchar(100),\000d\000astato varchar(100),\000d\000aprezzoFinale float\000d\000a)\000d\000a\000d\000acreate table Report(\000d\000aid_report int auto_increment primary key,\000d\000anumeroOrdini int,\000d\000aincassoTotale float,\000d\000aquantitaVenduta int\000d\000a)\000d\000a\000d\000acreate table ClientiRegistrati(\000d\000aid_cliente int auto_increment,\000d\000anome varchar(100),\000d\000acognome varchar(100),\000d\000aindirizzo varchar(100),\000d\000aemail varchar(100) primary key,\000d\000apassword varchar(100),\000d\000atelefono int)"; SQL statement:
+create table catalogo(
+id int auto_increment,
+nomeProdotto varchar(100) primary key)
+
+create table Magazzino(
+id_prodotto int primary key,
+quantitaDisponibile int)
+
+create table Prodotti(
+id_prodotto int auto_increment,
+categoria varchar(100),
+nomeProdotto varchar(100) nomeProdotto,
+descrizione varchar(1000),
+prezzoUnitario float)
+
+create table Ordini(
+id_ordine int auto_increment primary key,
+dataCreazione date,
+indirizzo varchar(100),
+email varchar(100),
+stato varchar(100),
+prezzoFinale float
+)
+
+create table Report(
+id_report int auto_increment primary key,
+numeroOrdini int,
+incassoTotale float,
+quantitaVenduta int
+)
+
+create table ClientiRegistrati(
+id_cliente int auto_increment,
+nome varchar(100),
+cognome varchar(100),
+indirizzo varchar(100),
+email varchar(100) primary key,
+password varchar(100),
+telefono int) [42000-240]
+2026-06-13 15:28:38.158123+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "create table catalogo(\000d\000aid int auto_increment primary key,\000d\000anomeProdotto varchar(100) unique)\000d\000a\000d\000a[*]create table Magazzino(\000d\000aid_prodotto int primary key,\000d\000aquantitaDisponibile int)\000d\000a\000d\000acreate table Prodotti(\000d\000aid_prodotto int auto_increment primary key,\000d\000acategoria varchar(100),\000d\000anomeProdotto varchar(100) unique,\000d\000adescrizione varchar(1000),\000d\000aprezzoUnitario decimal(10,2))\000d\000a\000d\000acreate table Ordini(\000d\000aid_ordine int auto_increment primary key,\000d\000adataCreazione date,\000d\000aindirizzo varchar(100),\000d\000aemail varchar(100),\000d\000astato varchar(100),\000d\000aprezzoFinale decimal(10,2)\000d\000a)\000d\000a\000d\000acreate table Report(\000d\000aid_report int auto_increment primary key,\000d\000anumeroOrdini int,\000d\000aincassoTotale decimal(10,2),\000d\000aquantitaVenduta int\000d\000a)\000d\000a\000d\000acreate table ClientiRegistrati(\000d\000aid_cliente int auto_increment primary key,\000d\000anome varchar(100),\000d\000acognome varchar(100),\000d\000aindirizzo varchar(100),\000d\000aemail varchar(100) unique,\000d\000apassword varchar(100),\000d\000atelefono varchar(20))"; SQL statement:
+create table catalogo(
+id int auto_increment primary key,
+nomeProdotto varchar(100) unique)
+
+create table Magazzino(
+id_prodotto int primary key,
+quantitaDisponibile int)
+
+create table Prodotti(
+id_prodotto int auto_increment primary key,
+categoria varchar(100),
+nomeProdotto varchar(100) unique,
+descrizione varchar(1000),
+prezzoUnitario decimal(10,2))
+
+create table Ordini(
+id_ordine int auto_increment primary key,
+dataCreazione date,
+indirizzo varchar(100),
+email varchar(100),
+stato varchar(100),
+prezzoFinale decimal(10,2)
+)
+
+create table Report(
+id_report int auto_increment primary key,
+numeroOrdini int,
+incassoTotale decimal(10,2),
+quantitaVenduta int
+)
+
+create table ClientiRegistrati(
+id_cliente int auto_increment primary key,
+nome varchar(100),
+cognome varchar(100),
+indirizzo varchar(100),
+email varchar(100) unique,
+password varchar(100),
+telefono varchar(20)) [42000-240]
+2026-06-13 16:32:40.237256+02:00 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "create table Ordini(\000d\000aid_ordine int auto_increment primary key,\000d\000aid_cliente int null, --parte null per l'utente guest\000d\000adataCreazione date,\000d\000aindirizzo varchar(100),\000d\000aemail varchar(100),\000d\000astato varchar(100),\000d\000aprezzoFinale decimal(10,2)\000d\000a[*]foreign key (id_cliente) references ClienteRegistrato(id_cliente) on delete set null\000d\000a)"; expected "ARRAY, INVISIBLE, VISIBLE, NOT NULL, DEFAULT, GENERATED, ON UPDATE, NOT NULL, DEFAULT ON NULL, SEQUENCE, SELECTIVITY, COMMENT, CONSTRAINT, COMMENT, PRIMARY KEY, UNIQUE, NOT NULL, CHECK, REFERENCES, ,, )"; SQL statement:
+create table Ordini(
+id_ordine int auto_increment primary key,
+id_cliente int null, --parte null per l'utente guest
+dataCreazione date,
+indirizzo varchar(100),
+email varchar(100),
+stato varchar(100),
+prezzoFinale decimal(10,2)
+foreign key (id_cliente) references ClienteRegistrato(id_cliente) on delete set null
+) [42001-240]
+2026-06-13 16:32:40.238756+02:00 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "ORDINI" not found; SQL statement:
+create table DettaglioOrdini(
+id_ordine int,
+id_prodotto int,
+quantitaSelezionata int,
+prezzoAcquisto decimal(10,2),
+primary key (id_ordine,id_prodotto),
+foreign key (id_ordine) references Ordini(id_ordine) on delete cascade,
+foreign key (id_prodotto) references Prodotti(id_prodotto)
+) [42102-240]
+2026-06-13 16:32:40.239255+02:00 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "create table Report(\000d\000aid_report int auto_increment primary key,\000d\000anumeroOrdini int,\000d\000aincassoTotale decimal(10,2),\000d\000a[*])"; expected "identifier"; SQL statement:
+create table Report(
+id_report int auto_increment primary key,
+numeroOrdini int,
+incassoTotale decimal(10,2),
+) [42001-240]
+2026-06-13 16:32:40.240255+02:00 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "REPORT" not found; SQL statement:
+create table DettaglioReport(
+id_report int,
+id_prodotto int,
+quantitaVenduta int,
+primary key (id_report,id_prodotto),
+foreign key (id_report) references Report(id_report) on delete cascade,
+foreign key (id_prodotto) references Prodotti(id_prodotto)) [42102-240]
+2026-06-13 16:33:06.110227+02:00 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "PRODOTTI" already exists; SQL statement:
+create table Prodotti(
+id_prodotto int auto_increment primary key,
+categoria varchar(100),
+nomeProdotto varchar(100) unique,
+descrizione varchar(1000),
+prezzoUnitario decimal(10,2)
+) [42101-240]
+2026-06-13 16:33:06.111231+02:00 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "MAGAZZINO" already exists; SQL statement:
+create table Magazzino(
+id_prodotto int primary key,
+quantitaDisponibile int,
+foreign key (id_prodotto) references Prodotti(id_prodotto) on delete cascade
+) [42101-240]
+2026-06-13 16:33:06.111735+02:00 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "create table Ordini(\000d\000aid_ordine int auto_increment primary key,\000d\000aid_cliente int null, \000d\000adataCreazione date,\000d\000aindirizzo varchar(100),\000d\000aemail varchar(100),\000d\000astato varchar(100),\000d\000aprezzoFinale decimal(10,2)\000d\000a[*]foreign key (id_cliente) references ClienteRegistrato(id_cliente) on delete set null\000d\000a)"; expected "ARRAY, INVISIBLE, VISIBLE, NOT NULL, DEFAULT, GENERATED, ON UPDATE, NOT NULL, DEFAULT ON NULL, SEQUENCE, SELECTIVITY, COMMENT, CONSTRAINT, COMMENT, PRIMARY KEY, UNIQUE, NOT NULL, CHECK, REFERENCES, ,, )"; SQL statement:
+create table Ordini(
+id_ordine int auto_increment primary key,
+id_cliente int null, 
+dataCreazione date,
+indirizzo varchar(100),
+email varchar(100),
+stato varchar(100),
+prezzoFinale decimal(10,2)
+foreign key (id_cliente) references ClienteRegistrato(id_cliente) on delete set null
+) [42001-240]
+2026-06-13 16:33:06.113245+02:00 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "ORDINI" not found; SQL statement:
+create table DettaglioOrdini(
+id_ordine int,
+id_prodotto int,
+quantitaSelezionata int,
+prezzoAcquisto decimal(10,2),
+primary key (id_ordine,id_prodotto),
+foreign key (id_ordine) references Ordini(id_ordine) on delete cascade,
+foreign key (id_prodotto) references Prodotti(id_prodotto)
+) [42102-240]
+2026-06-13 16:33:06.113245+02:00 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "create table Report(\000d\000aid_report int auto_increment primary key,\000d\000anumeroOrdini int,\000d\000aincassoTotale decimal(10,2),\000d\000a[*])"; expected "identifier"; SQL statement:
+create table Report(
+id_report int auto_increment primary key,
+numeroOrdini int,
+incassoTotale decimal(10,2),
+) [42001-240]
+2026-06-13 16:33:06.115253+02:00 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "REPORT" not found; SQL statement:
+create table DettaglioReport(
+id_report int,
+id_prodotto int,
+quantitaVenduta int,
+primary key (id_report,id_prodotto),
+foreign key (id_report) references Report(id_report) on delete cascade,
+foreign key (id_prodotto) references Prodotti(id_prodotto)) [42102-240]
+2026-06-13 16:33:06.115754+02:00 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "CLIENTIREGISTRATI" already exists; SQL statement:
+create table ClientiRegistrati(
+id_cliente int auto_increment primary key,
+nome varchar(100),
+cognome varchar(100),
+indirizzo varchar(100),
+email varchar(100) unique,
+password varchar(100),
+telefono varchar(20)) [42101-240]
+2026-06-13 16:33:46.316217+02:00 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "PRODOTTI" already exists; SQL statement:
+create table Prodotti(
+id_prodotto int auto_increment primary key,
+categoria varchar(100),
+nomeProdotto varchar(100) unique,
+descrizione varchar(1000),
+prezzoUnitario decimal(10,2)
+) [42101-240]
+2026-06-13 16:33:46.316717+02:00 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "MAGAZZINO" already exists; SQL statement:
+create table Magazzino(
+id_prodotto int primary key,
+quantitaDisponibile int,
+foreign key (id_prodotto) references Prodotti(id_prodotto) on delete cascade
+) [42101-240]
+2026-06-13 16:33:46.317216+02:00 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "create table Ordini(\000d\000aid_ordine int auto_increment primary key,\000d\000aid_cliente int null, \000d\000adataCreazione date,\000d\000aindirizzo varchar(100),\000d\000aemail varchar(100),\000d\000astato varchar(100),\000d\000aprezzoFinale decimal(10,2)\000d\000a[*]foreign key (id_cliente) references ClientiRegistrati(id_cliente) on delete set null\000d\000a)"; expected "ARRAY, INVISIBLE, VISIBLE, NOT NULL, DEFAULT, GENERATED, ON UPDATE, NOT NULL, DEFAULT ON NULL, SEQUENCE, SELECTIVITY, COMMENT, CONSTRAINT, COMMENT, PRIMARY KEY, UNIQUE, NOT NULL, CHECK, REFERENCES, ,, )"; SQL statement:
+create table Ordini(
+id_ordine int auto_increment primary key,
+id_cliente int null, 
+dataCreazione date,
+indirizzo varchar(100),
+email varchar(100),
+stato varchar(100),
+prezzoFinale decimal(10,2)
+foreign key (id_cliente) references ClientiRegistrati(id_cliente) on delete set null
+) [42001-240]
+2026-06-13 16:33:46.318718+02:00 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "ORDINI" not found; SQL statement:
+create table DettaglioOrdini(
+id_ordine int,
+id_prodotto int,
+quantitaSelezionata int,
+prezzoAcquisto decimal(10,2),
+primary key (id_ordine,id_prodotto),
+foreign key (id_ordine) references Ordini(id_ordine) on delete cascade,
+foreign key (id_prodotto) references Prodotti(id_prodotto)
+) [42102-240]
+2026-06-13 16:33:46.319717+02:00 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "create table Report(\000d\000aid_report int auto_increment primary key,\000d\000anumeroOrdini int,\000d\000aincassoTotale decimal(10,2),\000d\000a[*])"; expected "identifier"; SQL statement:
+create table Report(
+id_report int auto_increment primary key,
+numeroOrdini int,
+incassoTotale decimal(10,2),
+) [42001-240]
+2026-06-13 16:33:46.320719+02:00 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "REPORT" not found; SQL statement:
+create table DettaglioReport(
+id_report int,
+id_prodotto int,
+quantitaVenduta int,
+primary key (id_report,id_prodotto),
+foreign key (id_report) references Report(id_report) on delete cascade,
+foreign key (id_prodotto) references Prodotti(id_prodotto)) [42102-240]
+2026-06-13 16:33:46.321220+02:00 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "CLIENTIREGISTRATI" already exists; SQL statement:
+create table ClientiRegistrati(
+id_cliente int auto_increment primary key,
+nome varchar(100),
+cognome varchar(100),
+indirizzo varchar(100),
+email varchar(100) unique,
+password varchar(100),
+telefono varchar(20)) [42101-240]
+2026-06-13 16:34:09.274174+02:00 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "create table Report(\000d\000aid_report int auto_increment primary key,\000d\000anumeroOrdini int,\000d\000aincassoTotale decimal(10,2),\000d\000a[*])"; expected "identifier"; SQL statement:
+create table Report(
+id_report int auto_increment primary key,
+numeroOrdini int,
+incassoTotale decimal(10,2),
+) [42001-240]
+2026-06-13 16:35:06.394118+02:00 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: Unknown data type: "DATA"; SQL statement:
+create table Report(
+id_report int auto_increment primary key,
+meseRiferimento data,
+numeroOrdini int,
+incassoTotale decimal(10,2),
+) [50004-240]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:566)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.command.Parser.readIfDataType1(Parser.java:5908)
+	at org.h2.command.Parser.readIfDataType(Parser.java:5739)
+	at org.h2.command.Parser.parseColumnWithType(Parser.java:5721)
+	at org.h2.command.Parser.parseColumnForTable(Parser.java:5600)
+	at org.h2.command.Parser.parseTableColumnDefinition(Parser.java:8983)
+	at org.h2.command.Parser.parseCreateTable(Parser.java:8926)
+	at org.h2.command.Parser.parseCreate(Parser.java:6483)
+	at org.h2.command.Parser.parsePrepared(Parser.java:648)
+	at org.h2.command.Parser.parse(Parser.java:584)
+	at org.h2.command.Parser.parse(Parser.java:559)
+	at org.h2.command.Parser.prepareCommand(Parser.java:487)
+	at org.h2.engine.SessionLocal.prepareLocal(SessionLocal.java:647)
+	at org.h2.engine.SessionLocal.prepareCommand(SessionLocal.java:563)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1160)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:245)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:231)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1344)
+	at org.h2.server.web.WebApp.query(WebApp.java:1142)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1108)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1095)
+	at org.h2.server.web.WebThread.process(WebThread.java:190)
+	at org.h2.server.web.WebThread.run(WebThread.java:103)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2026-06-13 16:35:14.866103+02:00 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "create table Report(\000d\000aid_report int auto_increment primary key,\000d\000ameseRiferimento date,\000d\000anumeroOrdini int,\000d\000aincassoTotale decimal(10,2),\000d\000a[*])"; expected "identifier"; SQL statement:
+create table Report(
+id_report int auto_increment primary key,
+meseRiferimento date,
+numeroOrdini int,
+incassoTotale decimal(10,2),
+) [42001-240]
+2026-06-13 16:35:52.017727+02:00 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: Unknown data type: "DATA"; SQL statement:
+create table Report(
+id_report int auto_increment primary key,
+meseRiferimento data,
+numeroOrdini int,
+incassoTotale decimal(10,2)
+) [50004-240]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:566)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.command.Parser.readIfDataType1(Parser.java:5908)
+	at org.h2.command.Parser.readIfDataType(Parser.java:5739)
+	at org.h2.command.Parser.parseColumnWithType(Parser.java:5721)
+	at org.h2.command.Parser.parseColumnForTable(Parser.java:5600)
+	at org.h2.command.Parser.parseTableColumnDefinition(Parser.java:8983)
+	at org.h2.command.Parser.parseCreateTable(Parser.java:8926)
+	at org.h2.command.Parser.parseCreate(Parser.java:6483)
+	at org.h2.command.Parser.parsePrepared(Parser.java:648)
+	at org.h2.command.Parser.parse(Parser.java:584)
+	at org.h2.command.Parser.parse(Parser.java:559)
+	at org.h2.command.Parser.prepareCommand(Parser.java:487)
+	at org.h2.engine.SessionLocal.prepareLocal(SessionLocal.java:647)
+	at org.h2.engine.SessionLocal.prepareCommand(SessionLocal.java:563)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1160)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:245)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:231)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1344)
+	at org.h2.server.web.WebApp.query(WebApp.java:1142)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1108)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1095)
+	at org.h2.server.web.WebThread.process(WebThread.java:190)
+	at org.h2.server.web.WebThread.run(WebThread.java:103)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2026-06-13 16:36:19.386673+02:00 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "create table Ordini(\000d\000aid_ordine int auto_increment primary key,\000d\000aid_cliente int null, \000d\000adataCreazione date,\000d\000aindirizzo varchar(100),\000d\000aemail varchar(100),\000d\000astato varchar(100),\000d\000aprezzoFinale decimal(10,2)\000d\000a[*]foreign key (id_cliente) references ClientiRegistrati(id_cliente) on delete set null\000d\000a)"; expected "ARRAY, INVISIBLE, VISIBLE, NOT NULL, DEFAULT, GENERATED, ON UPDATE, NOT NULL, DEFAULT ON NULL, SEQUENCE, SELECTIVITY, COMMENT, CONSTRAINT, COMMENT, PRIMARY KEY, UNIQUE, NOT NULL, CHECK, REFERENCES, ,, )"; SQL statement:
+create table Ordini(
+id_ordine int auto_increment primary key,
+id_cliente int null, 
+dataCreazione date,
+indirizzo varchar(100),
+email varchar(100),
+stato varchar(100),
+prezzoFinale decimal(10,2)
+foreign key (id_cliente) references ClientiRegistrati(id_cliente) on delete set null
+) [42001-240]
+2026-06-13 16:37:13.489847+02:00 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "[*])"; SQL statement:
+) [42000-240]
+2026-06-15 22:28:56.036682+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Invalid value "2" for parameter "parameterIndex" [90008-240]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:658)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.getInvalidValueException(DbException.java:298)
+	at org.h2.jdbc.JdbcPreparedStatement.setParameter(JdbcPreparedStatement.java:1396)
+	at org.h2.jdbc.JdbcPreparedStatement.setString(JdbcPreparedStatement.java:388)
+	at database.ClientiRegistratiDao.registrati(ClientiRegistratiDao.java:68)
+	at control.Authenticator.registrati(Authenticator.java:11)
+	at gui.MainFinestra$7.actionPerformed(MainFinestra.java:478)
+	at java.desktop/javax.swing.AbstractButton.fireActionPerformed(AbstractButton.java:1972)
+	at java.desktop/javax.swing.AbstractButton$Handler.actionPerformed(AbstractButton.java:2314)
+	at java.desktop/javax.swing.DefaultButtonModel.fireActionPerformed(DefaultButtonModel.java:407)
+	at java.desktop/javax.swing.DefaultButtonModel.setPressed(DefaultButtonModel.java:262)
+	at java.desktop/javax.swing.plaf.basic.BasicButtonListener.mouseReleased(BasicButtonListener.java:279)
+	at java.desktop/java.awt.Component.processMouseEvent(Component.java:6621)
+	at java.desktop/javax.swing.JComponent.processMouseEvent(JComponent.java:3398)
+	at java.desktop/java.awt.Component.processEvent(Component.java:6386)
+	at java.desktop/java.awt.Container.processEvent(Container.java:2266)
+	at java.desktop/java.awt.Component.dispatchEventImpl(Component.java:4996)
+	at java.desktop/java.awt.Container.dispatchEventImpl(Container.java:2324)
+	at java.desktop/java.awt.Component.dispatchEvent(Component.java:4828)
+	at java.desktop/java.awt.LightweightDispatcher.retargetMouseEvent(Container.java:4948)
+	at java.desktop/java.awt.LightweightDispatcher.processMouseEvent(Container.java:4575)
+	at java.desktop/java.awt.LightweightDispatcher.dispatchEvent(Container.java:4516)
+	at java.desktop/java.awt.Container.dispatchEventImpl(Container.java:2310)
+	at java.desktop/java.awt.Window.dispatchEventImpl(Window.java:2780)
+	at java.desktop/java.awt.Component.dispatchEvent(Component.java:4828)
+	at java.desktop/java.awt.EventQueue.dispatchEventImpl(EventQueue.java:775)
+	at java.desktop/java.awt.EventQueue$4.run(EventQueue.java:720)
+	at java.desktop/java.awt.EventQueue$4.run(EventQueue.java:714)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:400)
+	at java.base/java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:87)
+	at java.base/java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:98)
+	at java.desktop/java.awt.EventQueue$5.run(EventQueue.java:747)
+	at java.desktop/java.awt.EventQueue$5.run(EventQueue.java:745)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:400)
+	at java.base/java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:87)
+	at java.desktop/java.awt.EventQueue.dispatchEvent(EventQueue.java:744)
+	at java.desktop/java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:203)
+	at java.desktop/java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:124)
+	at java.desktop/java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:113)
+	at java.desktop/java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:109)
+	at java.desktop/java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:101)
+	at java.desktop/java.awt.EventDispatchThread.run(EventDispatchThread.java:90)
+2026-06-15 22:29:56.528473+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Invalid value "2" for parameter "parameterIndex" [90008-240]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:658)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.getInvalidValueException(DbException.java:298)
+	at org.h2.jdbc.JdbcPreparedStatement.setParameter(JdbcPreparedStatement.java:1396)
+	at org.h2.jdbc.JdbcPreparedStatement.setString(JdbcPreparedStatement.java:388)
+	at database.ClientiRegistratiDao.registrati(ClientiRegistratiDao.java:68)
+	at control.Authenticator.registrati(Authenticator.java:11)
+	at gui.MainFinestra$7.actionPerformed(MainFinestra.java:478)
+	at java.desktop/javax.swing.AbstractButton.fireActionPerformed(AbstractButton.java:1972)
+	at java.desktop/javax.swing.AbstractButton$Handler.actionPerformed(AbstractButton.java:2314)
+	at java.desktop/javax.swing.DefaultButtonModel.fireActionPerformed(DefaultButtonModel.java:407)
+	at java.desktop/javax.swing.DefaultButtonModel.setPressed(DefaultButtonModel.java:262)
+	at java.desktop/javax.swing.plaf.basic.BasicButtonListener.mouseReleased(BasicButtonListener.java:279)
+	at java.desktop/java.awt.Component.processMouseEvent(Component.java:6621)
+	at java.desktop/javax.swing.JComponent.processMouseEvent(JComponent.java:3398)
+	at java.desktop/java.awt.Component.processEvent(Component.java:6386)
+	at java.desktop/java.awt.Container.processEvent(Container.java:2266)
+	at java.desktop/java.awt.Component.dispatchEventImpl(Component.java:4996)
+	at java.desktop/java.awt.Container.dispatchEventImpl(Container.java:2324)
+	at java.desktop/java.awt.Component.dispatchEvent(Component.java:4828)
+	at java.desktop/java.awt.LightweightDispatcher.retargetMouseEvent(Container.java:4948)
+	at java.desktop/java.awt.LightweightDispatcher.processMouseEvent(Container.java:4575)
+	at java.desktop/java.awt.LightweightDispatcher.dispatchEvent(Container.java:4516)
+	at java.desktop/java.awt.Container.dispatchEventImpl(Container.java:2310)
+	at java.desktop/java.awt.Window.dispatchEventImpl(Window.java:2780)
+	at java.desktop/java.awt.Component.dispatchEvent(Component.java:4828)
+	at java.desktop/java.awt.EventQueue.dispatchEventImpl(EventQueue.java:775)
+	at java.desktop/java.awt.EventQueue$4.run(EventQueue.java:720)
+	at java.desktop/java.awt.EventQueue$4.run(EventQueue.java:714)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:400)
+	at java.base/java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:87)
+	at java.base/java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:98)
+	at java.desktop/java.awt.EventQueue$5.run(EventQueue.java:747)
+	at java.desktop/java.awt.EventQueue$5.run(EventQueue.java:745)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:400)
+	at java.base/java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:87)
+	at java.desktop/java.awt.EventQueue.dispatchEvent(EventQueue.java:744)
+	at java.desktop/java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:203)
+	at java.desktop/java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:124)
+	at java.desktop/java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:113)
+	at java.desktop/java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:109)
+	at java.desktop/java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:101)
+	at java.desktop/java.awt.EventDispatchThread.run(EventDispatchThread.java:90)
+2026-06-15 22:47:22.694184+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "[*]remove * from CLIENTIREGISTRATI"; expected "ROLLBACK, REVOKE, RUNSCRIPT, RELEASE, REFRESH"; SQL statement:
+remove * from CLIENTIREGISTRATI [42001-240]
+2026-06-15 22:47:32.595477+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "drop [*]* from CLIENTIREGISTRATI"; expected "TABLE, INDEX, USER, SEQUENCE, CONSTANT, TRIGGER, MATERIALIZED, VIEW, ROLE, ALIAS, SCHEMA, ALL OBJECTS, DOMAIN, TYPE, AGGREGATE, SYNONYM"; SQL statement:
+drop * from CLIENTIREGISTRATI [42001-240]
+2026-06-15 22:47:40.260244+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "delete [*]* from CLIENTIREGISTRATI"; expected "identifier"; SQL statement:
+delete * from CLIENTIREGISTRATI [42001-240]
+2026-06-15 22:48:15.048904+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "select * [*]fromCLIENTIREGISTRATI"; SQL statement:
+select * fromCLIENTIREGISTRATI [42000-240]
